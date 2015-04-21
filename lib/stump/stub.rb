@@ -11,6 +11,8 @@ class Object
   #    my_string.retreat!    # => "run away!  run away!"
   #
   def stub!(method_name, options = {}, &stubbed)
+    Stump::Stubs.add(self, method_name)
+
     behavior = (block_given? ? stubbed : lambda { return options[:return] })
 
     safe_meta_def method_name, &behavior

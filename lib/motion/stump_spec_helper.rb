@@ -21,6 +21,7 @@ module Stump
 
       def it_with_mock_verification(description, &block)
         @after << proc { verify_mocks }
+        @after << proc { Stump::Stubs.clear! }
         it_without_mock_verification(description, &block)
       end
     end

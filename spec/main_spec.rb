@@ -209,5 +209,23 @@ describe "Application 'stump-test'" do
         alias_method :flunk, :original_flunk
       end
     end
+
+    describe "clear stubs" do
+      context "with stub" do
+        before do
+          Dog.stub!(:kind, return: 'Foo')
+        end
+
+        it "runs with stubs" do
+          Dog.kind.should == 'Foo'
+        end
+      end
+
+      context "without stub" do
+        it "runs without stubs" do
+          Dog.kind.should == 'Mammal'
+        end
+      end
+    end
   end
 end
